@@ -1,14 +1,23 @@
 version: "3"
 services:
   db:
-      image: mcr.microsoft.com/mssql/server
-      environment:
-          SA_PASSWORD: P@55w0rd
-          ACCEPT_EULA: Y
-      ports:
-        - 1433:1433
-      volumes: 
-        - mssql-db:/var/opt/mssql
+    image: mcr.microsoft.com/mssql/server
+    environment:
+        SA_PASSWORD: P@55w0rd
+        ACCEPT_EULA: Y
+    ports:
+      - 1433:1433
+    volumes:
+      - mssql-db:/var/opt/mssql
+  tools:
+    build: .
+    tty: true
+    environment:
+      MSSQL_CLI_SERVER: db
+      MSSQL_CLI_USER: sa
+      MSSQL_CLI_PASSWORD: P@55w0rd
+    depends_on:
+      - db
 
 volumes: 
   mssql-db:
