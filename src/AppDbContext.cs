@@ -1,11 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using src.Entities;
 
 namespace src
 {
     public partial class AppDbContext : DbContext
     {
+        public DbSet<Task> Tasks { get; set; }
+
         public AppDbContext()
         {
         }
